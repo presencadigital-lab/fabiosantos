@@ -145,7 +145,31 @@ footer{padding:32px var(--gutter)}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.marquee .track{animation:none}*{transition:none!important}}
 
+
+.proposal{margin-top:48px;padding:clamp(24px,3vw,40px);border:1px solid #38383b;background:#141415;min-width:0}
+.proposal h3{font-size:clamp(22px,2.2vw,30px);line-height:1.25;margin-bottom:12px}.proposal p{font-size:15px;line-height:1.7;color:#aaaab0;margin-bottom:28px}
+.proposal label{display:block;margin:20px 0 10px;font-size:13px;font-weight:600}
+.proposal input,.proposal textarea{display:block;width:100%;min-width:0;padding:14px 16px;border:1px solid #444448;border-radius:0;background:#0b0b0c;color:#ecebe7;font:inherit;font-size:16px;line-height:1.6}.proposal textarea{resize:vertical}.proposal input:focus-visible,.proposal textarea:focus-visible,.proposal button:focus-visible{outline:2px solid #ffe600;outline-offset:4px}
+.proposal-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.proposal button{flex:1 1 170px;padding:16px 12px;border:1px solid #ffe600;background:#ffe600;color:#0b0b0c;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s,color .2s}.proposal button[value=email]{background:transparent;color:#ecebe7;border-color:#555}.proposal button:hover{background:#ecebe7;color:#0b0b0c}.proposal small{display:block;color:#aaaab0;font-size:12px;line-height:1.6;margin-top:18px}
 </style>
+<meta name="description" content="Conheça o trabalho de Fábio Santos. Atuação, dança e criação. Vamos criar juntos?">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="canonical" href="https://presencadigital-lab.github.io/fabiosantos/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Fábio Santos — Cena, corpo e criação">
+<meta property="og:description" content="Conheça o trabalho de Fábio Santos. Atuação, dança e criação. Vamos criar juntos?">
+<meta property="og:url" content="https://presencadigital-lab.github.io/fabiosantos/">
+<meta property="og:site_name" content="Fábio Santos">
+<meta property="og:image" content="https://presencadigital-lab.github.io/fabiosantos/fabio-preview.jpg">
+<meta property="og:image:width" content="619">
+<meta property="og:image:height" content="1100">
+<meta property="og:image:alt" content="Retrato de Fábio Santos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fábio Santos — Cena, corpo e criação">
+<meta name="twitter:description" content="Conheça o trabalho de Fábio Santos. Atuação, dança e criação. Vamos criar juntos?">
+<meta name="twitter:image" content="https://presencadigital-lab.github.io/fabiosantos/fabio-preview.jpg">
 </head>
 <body>
 
@@ -242,6 +266,20 @@ footer{padding:32px var(--gutter)}
     <h2 class="display">Vamos criar<br>juntos?</h2>
     <p class="skills">Atuação • Dança<br>Desenho • Cartoons<br>Propostas como modelo</p>
     <p class="meta">São Paulo. Disponível para viagens a trabalho.</p>
+
+    <form class="proposal" id="proposal">
+      <h3>Tem uma ideia? Me conta.</h3>
+      <p>Deixe sua proposta e escolha por onde conversar.</p>
+      <label for="proposal-name">Seu nome</label>
+      <input id="proposal-name" name="name" autocomplete="name" placeholder="Como posso te chamar?" maxlength="100" required>
+      <label for="proposal-message">Sua proposta</label>
+      <textarea id="proposal-message" name="message" rows="5" maxlength="3000" placeholder="Conte um pouco sobre o projeto, a data e o local…" required></textarea>
+      <div class="proposal-actions">
+        <button type="submit" value="whatsapp">Abrir no WhatsApp ↗</button>
+        <button type="submit" value="email">Abrir no e-mail ↗</button>
+      </div>
+      <small>A mensagem abre pronta. Você revisa e envia pelo aplicativo.</small>
+    </form>
     <div class="links-list">
       <a href="https://instagram.com/seuamigofabio" target="_blank" rel="noopener">@seuamigofabio <small>Instagram</small></a>
       <a href="https://wa.me/5511980680200" target="_blank" rel="noopener">(11) 98068-0200 <small>WhatsApp</small></a>
@@ -299,6 +337,21 @@ footer{padding:32px var(--gutter)}
     else addEventListener('resize', frame, {passive:true});
   });
 })();
+</script>
+<script>
+document.getElementById('proposal').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const name = this.elements.name.value.trim();
+  const proposal = this.elements.message.value.trim();
+  if (!name || !proposal) return;
+  const message = 'Olá, Fábio! Sou ' + name + '. Vi seu portfólio e gostaria de conversar sobre uma proposta.\n\n' + proposal + '\n\nEncontrei você em: https://presencadigital-lab.github.io/fabiosantos/';
+  const channel = event.submitter ? event.submitter.value : 'whatsapp';
+  if (channel === 'email') {
+    window.location.href = 'mailto:fabiosantos@ciasama.org?subject=' + encodeURIComponent('Proposta de trabalho — ' + name) + '&body=' + encodeURIComponent(message);
+  } else {
+    window.open('https://wa.me/5511980680200?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+  }
+});
 </script>
 </body>
 </html>
